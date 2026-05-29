@@ -1,0 +1,17 @@
+.codegraph/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+
+# Private operating notes, resumes, and application logs stay local.
+output/*
+!output/.gitkeep
+
+# Old local scratch files are not part of the public portfolio project.
+1.py
+4.html
+brain.py
+executor(执行器.py
+scripts/build_resume_pdf.py
