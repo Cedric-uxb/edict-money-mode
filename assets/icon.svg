@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">CalmPlan icon</title>
+  <desc id="desc">A calm blue planning mark with three sorted lines.</desc>
+  <rect width="512" height="512" rx="96" fill="#1967d2"/>
+  <path d="M132 166c25-36 70-58 119-58 79 0 143 60 143 134 0 75-64 135-143 135-44 0-84-18-110-46l-43 13 16-42c-7-18-11-38-11-60 0-28 10-54 29-76z" fill="#ffffff"/>
+  <path d="M180 202h144M180 252h112M180 302h72" fill="none" stroke="#1967d2" stroke-width="28" stroke-linecap="round"/>
+</svg>

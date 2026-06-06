@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1967d2" />
+    <meta
+      name="description"
+      content="CalmPlan turns a messy brain dump into a calm 30-minute plan for students, job hunters, freelancers, and knowledge workers."
+    />
+    <title>CalmPlan</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-labelledby="app-title">
+        <div class="topbar">
+          <div class="brand-mark">
+            <img src="./assets/icon.svg" alt="" />
+            <span>CalmPlan</span>
+          </div>
+          <div class="language-switch" aria-label="Language">
+            <button type="button" class="lang-button active" data-lang="en">EN</button>
+            <button type="button" class="lang-button" data-lang="zh">中文</button>
+          </div>
+        </div>
+
+        <div class="intro">
+          <p class="kicker" data-i18n="kicker">CalmPlan</p>
+          <h1 id="app-title" data-i18n="title">Turn mental chaos into a calm 30-minute plan.</h1>
+          <p class="summary" data-i18n="summary">
+            Drop every task, worry, deadline, and loose thought here. CalmPlan sorts the mess into a short plan you can actually start.
+          </p>
+        </div>
+
+        <form class="planner" id="planner-form">
+          <div class="field-row">
+            <label for="persona" data-i18n="modeLabel">Mode</label>
+            <select id="persona" name="persona">
+              <option value="student" data-i18n="modeStudent">Student</option>
+              <option value="job-hunter" data-i18n="modeJobHunter">Job hunter</option>
+              <option value="freelancer" data-i18n="modeFreelancer">Freelancer</option>
+              <option value="worker" data-i18n="modeWorker">Knowledge worker</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <label for="energy" data-i18n="energyLabel">Energy</label>
+            <input id="energy" name="energy" type="range" min="1" max="5" value="3" />
+            <output id="energy-label" for="energy">Steady</output>
+          </div>
+
+          <div class="input-block">
+            <label for="brain-dump" data-i18n="brainDumpLabel">Brain dump</label>
+            <textarea
+              id="brain-dump"
+              name="brain-dump"
+              rows="12"
+              placeholder="Example: finish stats homework, apply to 3 remote jobs, email professor, rent is stressing me out, prepare interview, laundry, call family"
+            ></textarea>
+          </div>
+
+        <div class="actions">
+          <button type="submit" data-i18n="generateButton">Generate plan</button>
+          <button type="button" id="example-button" class="secondary" data-i18n="exampleButton">Use example</button>
+          <button type="button" id="clear-button" class="ghost" data-i18n="clearButton">Clear</button>
+        </div>
+        <p class="save-status" id="save-status" aria-live="polite"></p>
+        </form>
+
+        <nav class="product-links" aria-label="Product links">
+          <a href="./install.html" data-i18n="installLink">Install on phone</a>
+          <a href="./feedback.html" data-i18n="feedbackLink">Give feedback</a>
+          <a href="./privacy.html" data-i18n="privacyLink">Privacy</a>
+        </nav>
+      </section>
+
+      <section class="results" aria-live="polite" aria-labelledby="results-title">
+        <div class="results-header">
+          <div>
+            <p class="kicker" data-i18n="todayKicker">Today</p>
+            <h2 id="results-title" data-i18n="resultsTitle">Your calm plan</h2>
+          </div>
+          <div class="header-actions">
+            <button type="button" id="share-button" data-i18n="shareButton">Share</button>
+            <button type="button" id="copy-button" class="secondary" data-i18n="copyButton">Copy Markdown</button>
+          </div>
+        </div>
+
+        <div class="status-strip" id="status-strip">
+          <div>
+            <span class="metric" id="task-count">0</span>
+            <span data-i18n="itemsSorted">items sorted</span>
+          </div>
+          <div>
+            <span class="metric" id="focus-count">0</span>
+            <span data-i18n="focusItems">focus items</span>
+          </div>
+          <div>
+            <span class="metric" id="relief-count">0</span>
+            <span data-i18n="releaseItems">release items</span>
+          </div>
+        </div>
+
+        <div class="output-grid">
+          <article class="panel priority">
+            <h3 data-i18n="doToday">Do today</h3>
+            <ol id="today-list"></ol>
+          </article>
+          <article class="panel">
+            <h3 data-i18n="parkLater">Park for later</h3>
+            <ul id="later-list"></ul>
+          </article>
+          <article class="panel">
+            <h3 data-i18n="release">Release</h3>
+            <ul id="release-list"></ul>
+          </article>
+          <article class="panel">
+            <h3 data-i18n="sprint">30-minute sprint</h3>
+            <ol id="sprint-list"></ol>
+          </article>
+        </div>
+
+        <article class="message-panel">
+          <h3 data-i18n="messageDraft">Message draft</h3>
+          <p id="message-draft">
+            Add a brain dump, then CalmPlan will draft one short message you can send to reduce pressure.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
