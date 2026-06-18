@@ -1,0 +1,17 @@
+.codegraph/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+.env
+.streamlit/secrets.toml
+
+# Private operating notes, resumes, and application logs stay local.
+output/*
+!output/.gitkeep
+docs/images/*
+!docs/images/.gitkeep
+demo/*.mov
+demo/*.mp4
+demo/*.m4v
