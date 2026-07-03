@@ -37,8 +37,8 @@ Evidence screenshots are saved in:
 
 ## Required Links
 
-- GitHub URL: fill after creating the public repository
-- Demo video URL: fill after recording/uploading
+- GitHub URL: https://github.com/Cedric-uxb/edict-money-mode
+- Demo video URL: https://drive.google.com/file/d/1RVfHEPMVbFyakTAJXxxs_2ns2aY7pcq1/view
 
 ## Technologies
 
