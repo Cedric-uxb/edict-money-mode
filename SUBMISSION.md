@@ -22,15 +22,18 @@ The prototype uses a structured workflow with specialized departments for classi
 
 ## IBM Bob Usage
 
-IBM Bob should be used as the primary development assistant for:
+IBM Bob was used as the primary development assistant for:
 
 - Architecture review
-- Streamlit UI improvement
-- Test/debug support
+- Prototype improvement planning
 - README and submission review
+- Challenge-fit explanation
 - Final explanation screenshots
 
-Add Bob screenshots to `docs/images/` before final submission.
+Evidence screenshots are saved in:
+
+- `docs/images/bob_july_project_context.png`
+- `docs/images/bob_july_review_recommendation.png`
 
 ## Required Links
 
@@ -48,4 +51,5 @@ IBM Bob, Python, Streamlit, pandas, unittest
 - Clear README with challenge theme, problem, solution, AI approach, architecture, and IBM Bob usage
 - IBM SkillsBuild learning activity completion
 - Public demo video, maximum 3 minutes
+- IBM Bob evidence screenshots in `docs/images/`
 - No private application logs, resumes, local paths, tokens, or credentials

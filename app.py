@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 import streamlit as st
 
-from edict_money_team import EdictMoneyTeam, HubuConnectMonitor, Opportunity, demo_opportunities
+from edict_money_team import EdictMoneyTeam, HubuConnectMonitor, Opportunity, demo_opportunities, parse_opportunity_text
 
 
 st.set_page_config(page_title="Edict Work Mode", page_icon="EW", layout="wide")
@@ -17,6 +17,7 @@ def score_rows(team: EdictMoneyTeam, opportunities: tuple[Opportunity, ...]) -> 
             "Platform": item.opportunity.platform,
             "Score": item.total,
             "Verdict": item.verdict,
+            "Reason": "; ".join(item.rationale) if item.rationale else "Standard scoring applied",
             "Fit": item.fit,
             "Speed": item.speed,
             "Trust": item.trust,
@@ -39,6 +40,18 @@ left, right = st.columns([0.34, 0.66], gap="large")
 with left:
     st.subheader("Decision controls")
     available_connects = st.slider("Available proposal credits / connects", 0, 40, 20)
+    pasted_opportunity = st.text_area(
+        "Paste opportunity text",
+        placeholder="Title\nPlatform: Upwork\nBudget: Hourly: $10.00 - $40.00\nProposals: Fewer than 5\nClient: Payment verified\nConnects: 8\nSkills: Python, API, Automation",
+        height=190,
+    )
+    if pasted_opportunity.strip():
+        try:
+            parsed = parse_opportunity_text(pasted_opportunity)
+            opportunities = (*opportunities, parsed)
+            st.success(f"Parsed: {parsed.title}")
+        except ValueError as error:
+            st.warning(str(error))
     run = st.button("Run decision workflow", type="primary", width="stretch")
 
     st.divider()

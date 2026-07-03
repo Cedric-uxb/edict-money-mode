@@ -4,6 +4,14 @@ Edict Work Mode is an IBM AI Builders Challenge July 2026 wildcard prototype for
 
 The app helps a user evaluate work opportunities before spending time, proposal credits, or reputation. It scores opportunities, blocks bad fits, checks resource constraints, and produces a concrete action plan.
 
+## IBM Technology Evidence
+
+This project uses IBM Bob as the primary IBM AI-supported development tool. Bob was used to review the architecture, identify the opportunity parsing improvement, and prepare challenge-ready documentation.
+
+![IBM Bob open on the July project](docs/images/bob_july_project_context.png)
+
+![IBM Bob reviewing the July project architecture](docs/images/bob_july_review_recommendation.png)
+
 ## Challenge Fit
 
 - Challenge: AI Builders Challenge with IBM Bob, July 2026
@@ -23,6 +31,7 @@ Edict Work Mode turns opportunity review into a structured decision workflow.
 It:
 
 - Scores opportunities by fit, speed, trust, money, and risk.
+- Parses pasted opportunity text into structured fields for scoring.
 - Vetoes unrealistic or unsafe work before action.
 - Checks whether proposal credits/connects are sufficient.
 - Produces recommended next actions.
@@ -49,19 +58,21 @@ User mandate
 
 The current proof of concept uses deterministic Python scoring rules so every decision can be inspected. Future versions can add IBM Granite or another language model layer for opportunity parsing and proposal drafting, while keeping the same human approval gates.
 
+The pasted-text parser is intentionally local and transparent for the demo. It extracts common fields such as platform, budget, proposal count, client signal, skills, and required connects without sending private opportunity text to an external service.
+
 ## IBM Bob Usage
 
-IBM Bob is the required primary development tool for the July challenge. This repository is prepared for IBM Bob-assisted development.
+IBM Bob is the primary IBM AI-supported development tool used for this July challenge prototype.
 
-Planned Bob workflow:
+Bob was used to:
 
-- Ask IBM Bob to review the decision architecture and identify weak assumptions.
-- Use IBM Bob to improve the Streamlit prototype and user-facing explanations.
-- Use IBM Bob to debug tests and improve code readability.
-- Use IBM Bob to review the README and challenge submission text.
-- Save screenshots of Bob's useful review/debug outputs in `docs/images/` before final submission.
+- Review `app.py`, `edict_money_team.py`, and `README.md`.
+- Explain the current architecture and challenge fit.
+- Identify strengths, limitations, and weak assumptions in the prototype.
+- Recommend one high-impact, minimal next improvement: adding opportunity parsing while reusing the existing scoring and veto workflow.
+- Keep file changes human-approved instead of letting the assistant submit or spend anything automatically.
 
-This section will be updated with evidence screenshots after IBM Bob is used on the July project.
+The evidence screenshots are shown near the top of this README and saved in `docs/images/`.
 
 ## Project Structure
 
@@ -115,7 +126,7 @@ python -m streamlit run app.py
 
 ## Limitations
 
-This is a proof of concept. The current scoring rules are transparent but simple. It does not yet import real platform data, parse arbitrary job descriptions with an LLM, draft final proposals, or connect to external services.
+This is a proof of concept. The current scoring and parsing rules are transparent but simple. It does not yet import real platform data, parse arbitrary job descriptions with an LLM, draft final proposals, or connect to external services.
 
 ## Future Improvements
 
@@ -124,4 +135,4 @@ This is a proof of concept. The current scoring rules are transparent but simple
 - Add proposal drafting with mandatory human approval.
 - Add a persistent opportunity board.
 - Add a richer web dashboard and explainability view.
-- Add IBM Bob evidence screenshots and final demo video materials.
+- Add final demo video materials.

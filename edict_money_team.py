@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from datetime import date
 from typing import Iterable
@@ -80,6 +81,74 @@ class ConnectReport:
                 ]
             )
         return lines
+
+
+def parse_opportunity_text(raw_text: str) -> Opportunity:
+    """Parse a pasted opportunity snapshot into the existing scoring model."""
+    lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
+    if not lines:
+        raise ValueError("Paste an opportunity description before parsing.")
+
+    labels = {
+        "platform": ("platform",),
+        "budget": ("budget", "rate", "pay"),
+        "proposals": ("proposals", "proposal count"),
+        "client_signal": ("client", "client signal"),
+        "tags": ("skills", "tags"),
+        "required_connects": ("connects", "required connects"),
+        "url": ("url", "link"),
+    }
+
+    values: dict[str, str] = {}
+    description_lines: list[str] = []
+    title = lines[0]
+    for line in lines[1:]:
+        key, value = _split_label(line)
+        target = _field_for_label(key, labels) if key else None
+        if target:
+            values[target] = value
+        else:
+            description_lines.append(line)
+
+    text = "\n".join(lines)
+    url_match = re.search(r"https?://\S+", text)
+    tags = tuple(tag.strip() for tag in values.get("tags", "").split(",") if tag.strip())
+    connects_match = re.search(r"\d+", values.get("required_connects", ""))
+
+    return Opportunity(
+        title=title,
+        platform=values.get("platform", _guess_platform(text)),
+        url=values.get("url") or (url_match.group(0) if url_match else "pasted-opportunity"),
+        budget=values.get("budget", "Unknown"),
+        proposals=values.get("proposals", "Unknown"),
+        client_signal=values.get("client_signal", "Unknown"),
+        description=" ".join(description_lines),
+        tags=tags,
+        required_connects=int(connects_match.group(0)) if connects_match else 0,
+    )
+
+
+def _split_label(line: str) -> tuple[str, str] | tuple[None, str]:
+    if ":" not in line:
+        return None, line
+    key, value = line.split(":", 1)
+    return key.strip().lower(), value.strip()
+
+
+def _field_for_label(key: str, labels: dict[str, tuple[str, ...]]) -> str | None:
+    for field, aliases in labels.items():
+        if key in aliases:
+            return field
+    return None
+
+
+def _guess_platform(text: str) -> str:
+    lowered = text.lower()
+    if "upwork" in lowered:
+        return "Upwork"
+    if "handshake" in lowered:
+        return "Handshake"
+    return "Pasted text"
 
 
 @dataclass(frozen=True)

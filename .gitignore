@@ -12,6 +12,8 @@ output/*
 !output/.gitkeep
 docs/images/*
 !docs/images/.gitkeep
+!docs/images/bob_july_project_context.png
+!docs/images/bob_july_review_recommendation.png
 demo/*.mov
 demo/*.mp4
 demo/*.m4v
