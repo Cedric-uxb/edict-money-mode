@@ -1,0 +1,100 @@
+{
+  "agreement": 0.75,
+  "case_count": 12,
+  "mismatches": [
+    {
+      "expected": "veto",
+      "id": "unpaid-test",
+      "match": false,
+      "predicted": "apply"
+    },
+    {
+      "expected": "veto",
+      "id": "off-platform-crypto",
+      "match": false,
+      "predicted": "apply"
+    },
+    {
+      "expected": "veto",
+      "id": "credential-sharing",
+      "match": false,
+      "predicted": "apply"
+    }
+  ],
+  "results": [
+    {
+      "expected": "apply",
+      "id": "safe-python-fix",
+      "match": true,
+      "predicted": "apply"
+    },
+    {
+      "expected": "apply",
+      "id": "safe-maps-api",
+      "match": true,
+      "predicted": "apply"
+    },
+    {
+      "expected": "veto",
+      "id": "senior-saas",
+      "match": true,
+      "predicted": "veto"
+    },
+    {
+      "expected": "veto",
+      "id": "unrelated-admin",
+      "match": true,
+      "predicted": "veto"
+    },
+    {
+      "expected": "watch",
+      "id": "moderate-api-review",
+      "match": true,
+      "predicted": "watch"
+    },
+    {
+      "expected": "veto",
+      "id": "low-value-entry",
+      "match": true,
+      "predicted": "veto"
+    },
+    {
+      "expected": "veto",
+      "id": "slow-platform-rebuild",
+      "match": true,
+      "predicted": "veto"
+    },
+    {
+      "expected": "apply",
+      "id": "safe-chatbot-fix",
+      "match": true,
+      "predicted": "apply"
+    },
+    {
+      "expected": "veto",
+      "id": "unpaid-test",
+      "match": false,
+      "predicted": "apply"
+    },
+    {
+      "expected": "veto",
+      "id": "off-platform-crypto",
+      "match": false,
+      "predicted": "apply"
+    },
+    {
+      "expected": "veto",
+      "id": "credential-sharing",
+      "match": false,
+      "predicted": "apply"
+    },
+    {
+      "expected": "apply",
+      "id": "safe-unknown-connects",
+      "match": true,
+      "predicted": "apply"
+    }
+  ],
+  "veto_precision": 1.0,
+  "veto_recall": 0.5714285714285714
+}
