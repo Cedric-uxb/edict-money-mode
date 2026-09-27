@@ -28,6 +28,13 @@ class EvaluationTests(unittest.TestCase):
             self.assertGreaterEqual(report[name], 0.0)
             self.assertLessEqual(report[name], 1.0)
 
+    def test_known_high_risk_cases_are_vetoed(self):
+        report = evaluate_cases(load_cases(CASES_PATH))
+        predictions = {item["id"]: item["predicted"] for item in report["results"]}
+
+        for case_id in ("unpaid-test", "off-platform-crypto", "credential-sharing"):
+            self.assertEqual("veto", predictions[case_id])
+
 
 if __name__ == "__main__":
     unittest.main()

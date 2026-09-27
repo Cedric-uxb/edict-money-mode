@@ -8,6 +8,8 @@
 
 **Tech Stack:** Python 3, `unittest`, JSONL, Streamlit, IBM Bob 2.0.
 
+**Execution note (2026-09-27):** A new Bob session could not run because IBM returned `Account Not Ready Yet` and required a subscription. The repository therefore preserves the verified earlier Bob parsing contribution and does not attribute the later safety-rule change to Bob.
+
 ---
 
 ### Task 1: Add The Reproducible Evaluation Contract
@@ -423,10 +425,11 @@ Run:
 python3 -m unittest discover -s tests -p "test*.py" -v
 python3 evals/run_eval.py
 git diff --check
-git grep -nE '(/Users/dengxu|@drew\.edu|ASSEMBLYAI_API_KEY=.+|gh[pousr]_[A-Za-z0-9]+)' -- .
+git grep -n "$(printf '/Users/%s' "$USER")" -- . || true
+git grep -nE '(API_KEY|TOKEN|PASSWORD)=[^<[:space:]]+' -- . || true
 ```
 
-Expected: tests pass; evaluation is reproducible; `git diff --check` passes; secret/path scan has no private-value matches.
+Expected: tests pass; evaluation is reproducible; `git diff --check` passes; secret/path scans print no private values.
 
 - [ ] **Step 5: Commit challenge documentation**
 

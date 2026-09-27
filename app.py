@@ -14,15 +14,15 @@ def score_rows(team: EdictMoneyTeam, opportunities: tuple[Opportunity, ...]) -> 
     return [
         {
             "Title": item.opportunity.title,
-            "Platform": item.opportunity.platform,
-            "Score": item.total,
             "Verdict": item.verdict,
+            "Risk penalty": item.risk,
+            "Score": item.total,
             "Reason": "; ".join(item.rationale) if item.rationale else "Standard scoring applied",
+            "Platform": item.opportunity.platform,
             "Fit": item.fit,
             "Speed": item.speed,
             "Trust": item.trust,
             "Money": item.money,
-            "Risk penalty": item.risk,
             "Required connects": item.opportunity.required_connects,
         }
         for item in scored
@@ -33,9 +33,10 @@ team = EdictMoneyTeam()
 opportunities = demo_opportunities()
 
 st.title("Edict Work Mode")
-st.caption("IBM Bob wildcard prototype for intelligent work decision support")
+st.caption("Proof Before Apply - transparent work opportunity decision support")
 
 left, right = st.columns([0.34, 0.66], gap="large")
+parsed = None
 
 with left:
     st.subheader("Decision controls")
@@ -57,9 +58,21 @@ with left:
     st.divider()
     st.metric("Opportunities", len(opportunities))
     st.metric("Departments", len(team.stages))
-    st.write("Selected challenge theme: wildcard, Future of Work.")
+    st.write("IBM Bob 2.0 Hackathon project: Proof Before Apply.")
 
 with right:
+    if parsed is not None:
+        parsed_score = team.score(parsed)
+        st.subheader("Pasted opportunity decision")
+        verdict_col, risk_col, score_col = st.columns(3)
+        verdict_col.metric("Verdict", parsed_score.verdict.upper())
+        risk_col.metric("Risk penalty", f"{parsed_score.risk}/10")
+        score_col.metric("Total score", f"{parsed_score.total}/50")
+        if parsed_score.verdict == "veto":
+            st.error("Blocked before application")
+        for reason in parsed_score.rationale:
+            st.write(f"- {reason}")
+
     st.subheader("Opportunity board")
     rows = score_rows(team, opportunities)
     st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)

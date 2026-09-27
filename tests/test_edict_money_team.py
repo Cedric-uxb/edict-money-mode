@@ -50,6 +50,34 @@ class EdictMoneyTeamTests(unittest.TestCase):
             "Should mention high risk for veto verdict"
         )
 
+    def test_hard_veto_signals_override_positive_fit(self):
+        team = EdictMoneyTeam()
+        for description in (
+            "Complete an unpaid test task before contract.",
+            "Accept crypto payment outside Upwork.",
+            "Share login credentials and send a password.",
+        ):
+            with self.subTest(description=description):
+                scored = team.score(
+                    Opportunity(
+                        title="Fast Python API automation",
+                        platform="Upwork",
+                        url="https://example.com/synthetic-risk",
+                        budget="Hourly: $10.00 - $40.00",
+                        proposals="Fewer than 5",
+                        client_signal="Payment verified, 5.0 rating",
+                        description=description,
+                        tags=(
+                            "Python", "Automation", "API", "Google Sheets",
+                            "Workflow", "Chatbot", "MCP", "OpenAI",
+                        ),
+                        required_connects=8,
+                    )
+                )
+                self.assertEqual("veto", scored.verdict)
+                self.assertGreaterEqual(scored.risk, 8)
+                self.assertIn("Hard safety signal detected; do not apply.", scored.rationale)
+
     def test_connect_monitor_blocks_when_connects_are_insufficient(self):
         team = EdictMoneyTeam()
         scored = [

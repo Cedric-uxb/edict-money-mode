@@ -6,6 +6,18 @@ from datetime import date
 from typing import Iterable
 
 
+HARD_VETO_SIGNALS = (
+    "unpaid test",
+    "free test task",
+    "outside upwork",
+    "crypto payment",
+    "pay in crypto",
+    "share login credentials",
+    "send a password",
+    "credential sharing",
+)
+
+
 @dataclass(frozen=True)
 class Opportunity:
     title: str
@@ -383,7 +395,9 @@ class EdictMoneyTeam:
             rationale.append("Looks small enough for a fast first milestone.")
         if "fewer than 5" in text:
             rationale.append("Low proposal count improves early-account odds.")
-        if risk >= 6:
+        if any(signal in text for signal in HARD_VETO_SIGNALS):
+            rationale.append("Hard safety signal detected; do not apply.")
+        elif risk >= 6:
             rationale.append("Risk is high; do not apply unless scope is narrowed.")
         if money <= 4:
             rationale.append("Money is weak; only worth it for review potential or follow-up work.")
@@ -459,6 +473,9 @@ class EdictMoneyTeam:
 
     @staticmethod
     def _risk_penalty(text: str) -> int:
+        if any(signal in text for signal in HARD_VETO_SIGNALS):
+            return 10
+
         risk = 1
         for signal in (
             "production-grade",
