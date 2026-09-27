@@ -4,6 +4,30 @@
 
 Edict Work Mode: Proof Before Apply
 
+## Submission Form Copy
+
+### Submission Title
+
+Edict Work Mode: Proof Before Apply
+
+### Short Description
+
+Edict helps early-career builders inspect work opportunities, veto unsafe requests, check proposal credits, and keep every application under human approval.
+
+### Long Description
+
+Students and early-career builders often face noisy opportunity pipelines: freelance jobs, internships, automation tasks, and remote roles. A listing can look attractive because it matches their technical skills, yet still contain unsafe conditions such as unpaid test work, off-platform payment, or credential sharing. Applying indiscriminately wastes time, proposal credits, and reputation.
+
+Edict Work Mode turns this decision into a transparent workflow. A user pastes an opportunity, and Edict extracts common fields, scores fit, speed, trust, money, and risk, then returns apply, watch, or veto with reasons. A Connects gate checks whether the user has enough proposal credits, while every application, message, and spend remains under human approval. The interface makes the decision visible before action instead of automating a risky submission.
+
+The project is designed for students and early-career AI builders who need a practical filter, not another generic task manager. Its key differentiator is reproducibility: twelve synthetic cases are stored in the repository with baseline and post-change reports. The baseline found three false negatives. One shared hard-veto rule raised exact agreement from 75% to 100% and veto recall from 57.14% to 100% while veto precision remained 100%. These are fixture results, not production or model-accuracy claims.
+
+### IBM Bob Usage Statement
+
+IBM Bob was used as a repository-context development partner during the original Edict prototype work. Bob reviewed `app.py`, `edict_money_team.py`, and the project documentation, explained the existing architecture, and recommended one focused improvement: add a pasted-opportunity input, convert the text into the existing `Opportunity` structure, and reuse the existing scoring and veto workflow instead of rebuilding the application. The accepted implementation is preserved in commit `61f2faa`, with corresponding parser tests and two screenshots in `docs/images/`.
+
+Bob also proposed an IBM Granite or other LLM parser. We reviewed that suggestion but deliberately kept the first parser local and deterministic because it was sufficient for the proof of concept, avoided transmitting opportunity text, and preserved inspectability and human approval. `BOB.md` documents the accepted recommendation, evidence, and boundary. A new Bob session was attempted on September 27, 2026, but IBM returned `Account Not Ready Yet` and required a subscription; therefore the later twelve-case safety evaluation and hard-veto regression are not attributed to Bob. This separation keeps the submission specific and verifiable.
+
 ## Challenge Theme
 
 IBM Bob 2.0 Hackathon
@@ -66,4 +90,5 @@ IBM Bob, Python, Streamlit, pandas, unittest
 - Public demo video, maximum 3 minutes
 - IBM Bob evidence screenshots in `docs/images/`
 - Reproducible baseline and after reports in `evals/`
+- Standard MIT License with copyright held by Qizhong Deng
 - No private application logs, resumes, local paths, tokens, or credentials

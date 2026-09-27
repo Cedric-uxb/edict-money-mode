@@ -6,6 +6,9 @@ __pycache__/
 .vscode/
 .env
 .streamlit/secrets.toml
+.chart-data-*/
+.codex-finalizer/
+.codex-pitch-build/
 
 # Private operating notes, resumes, and application logs stay local.
 output/*
